@@ -61,22 +61,23 @@ public class MotorDeOrganizacao {
                 for (Path arquivoAtual : gaveta) {
                     String nome = arquivoAtual.getFileName().toString().toLowerCase();
 
-                    if (tentarMover(arquivoAtual, nome, this.pastaVideos, ".mp4", ".mkv", ".mov")){
-                        continue;
-                    }
-                    if (tentarMover(arquivoAtual, nome, this.pastaImagens, ".jpg", ".jpeg", ".png", ".webp", ".gif")) {
+                    if (tentarMover(arquivoAtual, nome, this.pastaVideos, ".mp4", ".mkv", ".mov", ".webm", ".flv", ".avi", ".wmv", ".qt")) {
                         continue;
                     }
 
-                    if (tentarMover(arquivoAtual, nome, this.pastaArquivos, ".pdf", ".docx", ".txt", ".xlsx", ".pptx")) {
+                    if (tentarMover(arquivoAtual, nome, this.pastaImagens, ".jpg", ".jpeg", ".png", ".webp", ".gif", ".heic", ".heif", ".svg", ".bmp", ".tiff", ".tif")) {
                         continue;
                     }
 
-                    if (tentarMover(arquivoAtual, nome, this.pastaCompactados, ".zip", ".rar", ".7z")) {
+                    if (tentarMover(arquivoAtual, nome, this.pastaArquivos, ".pdf", ".docx", ".txt", ".xlsx", ".pptx", ".md", ".markdown", ".odt", ".ods", ".odp", ".rtf", ".pages", ".numbers", ".key", ".csv", ".log")) {
                         continue;
                     }
 
-                    if (tentarMover(arquivoAtual, nome, this.pastaExecutaveis, ".exe", ".msi", ".bat")) {
+                    if (tentarMover(arquivoAtual, nome, this.pastaCompactados, ".zip", ".rar", ".7z", ".tar", ".gz", ".tar.gz", ".tgz", ".bz2", ".tar.bz2", ".xz", ".tar.xz", ".sitx")) {
+                        continue;
+                    }
+
+                    if (tentarMover(arquivoAtual, nome, this.pastaExecutaveis, ".exe", ".msi", ".bat", ".dmg", ".pkg", ".app", ".deb", ".rpm", ".appimage", ".flatpak", ".snap", ".sh", ".bash", ".zsh", ".py", ".pl")) {
                         continue;
                     }
                 }

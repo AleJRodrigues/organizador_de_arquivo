@@ -1,4 +1,4 @@
-package organizador;
+import organizador.MotorDeOrganizacao;
 
 import javax.swing.*;
 import java.awt.*;
