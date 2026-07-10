@@ -2,6 +2,7 @@ package organizador;
 
 import java.io.File;
 import java.nio.file.*;
+import java.util.function.Consumer;
 
 public class MotorDeOrganizacao {
 
@@ -11,6 +12,8 @@ public class MotorDeOrganizacao {
     private Path pastaArquivos;
     private Path pastaCompactados;
     private Path pastaExecutaveis;
+
+    private Consumer<String> logger;
 
     public MotorDeOrganizacao(){
         String raizUsuario = System.getProperty("user.home");
@@ -32,8 +35,20 @@ public class MotorDeOrganizacao {
         this.pastaExecutaveis = raizPessoal.resolve("Documentos").resolve("Documentos-Download").resolve("Executavel-Download");
     }
 
+    public void setLogger(Consumer<String> logger){
+        this.logger = logger;
+    }
+
+    private void registrarLog(String mensagem){
+        if (logger != null){
+            logger.accept(mensagem);
+        } else {
+            System.out.println(mensagem);
+        }
+    }
+
     public void iniciar(){
-        System.out.println("Motor iniciado! Inspecionando pastas....");
+        registrarLog("Motor iniciado! Inspecionando pastas....");
 
         try {
             Files.createDirectories(this.pastaVideos);
@@ -68,10 +83,10 @@ public class MotorDeOrganizacao {
 
 
             }
-            System.out.println("Tudo Organizado.");
+            registrarLog("Tudo Organizado.");
 
         } catch (Exception e){
-            System.out.println("Erro critico: " + e.getMessage());
+            registrarLog("Erro critico: " + e.getMessage());
         }
 
 
@@ -84,10 +99,10 @@ public class MotorDeOrganizacao {
                 try{
                     Path destinoFinal = pastaDestino.resolve(arquivo.getFileName());
                     Files.move(arquivo, destinoFinal, StandardCopyOption.REPLACE_EXISTING);
-                    System.out.println("Movido para " + pastaDestino.getFileName() + ": " + arquivo.getFileName());
+                    registrarLog("Movido para " + pastaDestino.getFileName() + ": " + arquivo.getFileName());
                     return true;
                 } catch (Exception e) {
-                    System.out.println("Erro ao mover " + arquivo.getFileName() + ": " + e.getMessage());
+                    registrarLog("Erro ao mover " + arquivo.getFileName() + ": " + e.getMessage());
                 }
             }
         }
